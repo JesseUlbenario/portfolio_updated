@@ -3,13 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import CertificateCard from './CertificateCard';
+import AwardCard from './AwardCard';
 
 export default function Home() {
   // 1. Keep track of which section is currently visible on screen
   const [activeSection, setActiveSection] = useState('#overview-section');
 
   useEffect(() => {
-    const sections = ['#overview-section', '#projects-section', '#certificates-section', '#Awards-section', '#Education-section'];
+    // FIXED: Cleaned all section paths to strict matching lowercase IDs
+    const sections = ['#overview-section', '#projects-section', '#certificates-section', '#awards-section', '#education-section'];
     
     const observerOptions = {
       root: null, // uses the browser viewport
@@ -68,8 +71,8 @@ export default function Home() {
                 { label: 'Overview', icon: '⌂', href: '#overview-section' },
                 { label: 'Projects', icon: '⧉', href: '#projects-section' },
                 { label: 'Certificates', icon: '❂', href: '#certificates-section' },
-                { label: 'Awards', icon: '✦', href: '#Awards-section' },
-                { label: 'Education', icon: '🕮', href: '#Education-section' },
+                { label: 'Awards', icon: '✦', href: '#awards-section' },
+                { label: 'Education', icon: '🕮', href: '#education-section' },
               ].map((item, idx) => {
                 const isActive = activeSection === item.href;
 
@@ -126,6 +129,8 @@ export default function Home() {
                   src="/Photos/GradPhoto.png"
                   alt="Jesse Ulbenario Graduation Photo"
                   fill
+                  sizes="264px"
+                  priority
                   className="object-cover object-center mix-blend-luminosity opacity-80" 
                 />
               </div>
@@ -133,15 +138,14 @@ export default function Home() {
               <h1 className="text-4xl font-extrabold tracking-tight text-stone-100 sm:text-5xl uppercase font-serif">
                 Jesse Ulbenario
               </h1>
-              <p className="mt-2 text-[10px] text-justify not-first:font-mono tracking-widest text-amber-500/80">
-                Jesse is currently pursuing a bachelor's degree in computer science in Mapua Malayan Colleges Mindanao.
-                She has experienced with multiple languages and a knack for frontend and backend development.
-                With an eye for design and detail, her strive for making not only appealing but projects that would also benefit communities.
+              {/* FIXED: Grammatical flow update */}
+              <p className="mt-2 text-[10px] text-justify font-sans tracking-widest text-amber-500/80 leading-relaxed">
+                Jesse is currently pursuing a bachelor's degree in computer science at Mapúa Malayan Colleges Mindanao. She has experience with multiple languages and a knack for frontend and backend development. With an eye for design and detail, she strives to make projects that are not only visually appealing but also beneficial to communities.
               </p>
           </div>
         </section>
 
-        {/* 4. RIGHT ACTION PANELS (Smooth Expansion Hover Layout) */}
+        {/* 4. RIGHT ACTION PANELS */}
         <section className="absolute right-20 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col space-y-5 w-72">
           <a href="#projects-section" className="group block relative overflow-hidden bg-stone-950 text-stone-200 border border-stone-800 p-5 rounded-lg bg-[radial-gradient(circle_at_bottom_left,#ffffff03_35%,transparent_36%)] transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-amber-500/40 card-glow cursor-pointer select-none">
             <div className="absolute top-0 right-0 p-2 text-[9px] font-mono text-stone-600 group-hover:text-amber-500/50">
@@ -149,7 +153,7 @@ export default function Home() {
             </div>
             <div className="text-[10px] tracking-widest font-mono text-amber-500 uppercase">Featured Work</div>
             <h3 className="text-xl font-bold font-serif tracking-wide mt-1 text-stone-200 group-hover:text-white">
-              SEE MY WORK →
+              PERUSE THROUGH →
             </h3>
             <p className="text-xs text-stone-500 mt-2 line-clamp-2">
               Explore the Library of past deployments and web designs.
@@ -166,13 +170,13 @@ export default function Home() {
               <span className="text-sm font-bold tracking-wide mt-1 block text-stone-300 group-hover:text-amber-400">Certificates</span>
             </a>
 
-            <a href="#Awards-section" className="group block bg-stone-950 border border-stone-800 p-3 rounded-lg transition-all duration-300 ease-out hover:scale-[1.05] hover:-translate-y-0.5 hover:border-amber-500/40 card-glow cursor-pointer select-none">
+            <a href="#awards-section" className="group block bg-stone-950 border border-stone-800 p-3 rounded-lg transition-all duration-300 ease-out hover:scale-[1.05] hover:-translate-y-0.5 hover:border-amber-500/40 card-glow cursor-pointer select-none">
               <span className="text-[9px] text-stone-500 block font-mono">🎖 AWARDS</span>
               <span className="text-sm font-bold tracking-wide mt-1 block text-stone-300 group-hover:text-amber-400">Awards</span>
             </a>
           </div>
 
-          <a href="#Education-section" className="group block relative overflow-hidden bg-gradient-to-r from-amber-950/10 to-stone-950 border border-amber-900/40 p-4 rounded-lg transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-amber-500/50 card-glow cursor-pointer select-none">
+          <a href="#education-section" className="group block relative overflow-hidden bg-gradient-to-r from-amber-950/10 to-stone-950 border border-amber-900/40 p-4 rounded-lg transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-amber-500/50 card-glow cursor-pointer select-none">
             <div className="flex justify-between items-center">
               <div>
                 <span className="text-[9px] tracking-widest font-mono text-amber-500 block">TO THE FUTURE</span>
@@ -186,20 +190,18 @@ export default function Home() {
         </section>
       </div>
 
-      {/* 5. NEW SCROLLABLE CONTENT AREA */}
+      {/* 5. PROJECTS SECTION */}
       <section 
         id="projects-section" 
         className="relative min-h-screen w-full bg-stone-900 border-t border-stone-800 p-12 md:p-24 z-30"
       >
         <div className="max-w-4xl mx-auto">
           
-          {/* Section Header */}
           <div className="flex items-center space-x-4 mb-16">
             <span className="text-amber-500 font-mono text-xs tracking-widest">[ DEPLOYED_LOG_01 ]</span>
             <h2 className="text-3xl font-serif tracking-wide text-stone-100 uppercase">Project Directory</h2>
           </div>
 
-          {/* Vertical Stack Layout for Expanding Folders */}
           <div className="flex flex-col space-y-6 items-start">
             {[
               {
@@ -207,7 +209,7 @@ export default function Home() {
                 name: "SolarKapitBahay",
                 link: "https://solarkapitbahay.vercel.app/",
                 coverImage: "/Photos/Background/SolarPanel.jpg",
-                description: "A peer-to-peer energy sgaring platform for Philippine Barangay and Communities in Rural areas.",
+                description: "A peer-to-peer energy sharing platform for Philippine Barangays and rural communities.",
                 tags: ["IoT INTEGRATION", "ENERGY SHARING", "GREEDY ALGORITHM ALLOCATION"],
                 placeholders: [
                   "/Photos/SolarKapitBahay/LogIn.png",
@@ -233,24 +235,22 @@ export default function Home() {
                 ]
               }
             ].map((project) => {
-              // Create an explicit check to see if THIS specific folder card is open
               const isFolderOpen = activeSection === `#project-${project.id}`;
 
               return (
                 <button
                   key={project.id}
                   onClick={() => {
-                    // Toggle open by updating the state hook we made earlier
                     if (isFolderOpen) {
                       setActiveSection("#projects-section");
                     } else {
                       setActiveSection(`#project-${project.id}`);
                     }
                   }}
-                  className={`relative h-80 flex text-left transition-all duration-500 ease-out select-none focus:outline-none group w-full max-w-3xl`}
+                  className="relative h-80 flex text-left transition-all duration-500 ease-out select-none focus:outline-none group w-full max-w-3xl"
                 >
                   
-                  {/* 1. EXTENDED DARK INNER BACKING PANEL */}
+                  {/* EXTENDED INNER BACKING */}
                   <div
                     className={`absolute bottom-0 right-0 h-[94%] bg-[#1c1206] rounded-r-md p-6 flex flex-col justify-between transition-all duration-500 ease-out border border-amber-950/40 shadow-xl
                       ${isFolderOpen ? "w-[78%] opacity-100 translate-x-0" : "w-[88%] opacity-0 translate-x-4 pointer-events-none"}`}
@@ -261,35 +261,37 @@ export default function Home() {
                         <p className="text-xs text-stone-400 mt-1 font-sans max-w-xl leading-relaxed">{project.description}</p>
                       </div>
 
-                      {/* Dynamic Scrollable Picture Block Container */}
                       <div className="mt-2">
-                        {/* Horizontal Scroll Wrapper */}
                         <div className="flex space-x-4 overflow-x-auto pb-3 pt-1 scrollbar-thin scrollbar-thumb-amber-800/60 scrollbar-track-stone-950/40">
                           {project.placeholders.map((imagePath, i) => (
-                          <div 
-                          key={i} 
-                          /* UPDATED SIZE CLASSES AND REMOVED THE OVERLAY MIX BLEND */
-                          className="h-44 w-64 shrink-0 rounded border border-amber-900/10 p-3 flex flex-col justify-between shadow-md hover:scale-[1.02] transition-transform bg-cover bg-center bg-no-repeat bg-stone-800"
-                          style={{ backgroundImage: `url('${imagePath}')` }}
-                          >
-                          {/* Optional text labels styled with text-shadow for readability without an overlay */}
-                          <span className="text-xs text-stone-100 font-mono leading-tight drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-                            Screenshot {i+1}
-                          </span>
+                            <div 
+                              key={i} 
+                              className="h-44 w-64 shrink-0 rounded border border-amber-900/10 p-3 flex flex-col justify-between shadow-md hover:scale-[1.02] transition-transform bg-cover bg-center bg-no-repeat bg-stone-800"
+                              style={{ backgroundImage: `url('${imagePath}')` }}
+                            >
+                              <span className="text-xs text-stone-100 font-mono leading-tight drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+                                Screenshot {i+1}
+                              </span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
                       </div>
-                    </div>
                     </div>
                   </div>
 
-                  {/* 2. OVERLYING FRONT TAB COVER */}
+                  {/* OVERLYING FRONT COVER */}
                   <div
-                    className={`absolute bottom-0 left-0 h-[94%] bg-[#543206] border border-amber-800/40 text-stone-100 p-5 flex flex-col justify-between shadow-2xl transition-all duration-500 ease-out rounded-l-md
-                      ${isFolderOpen ? "w-[22%] rounded-r-none" : "w-full rounded-r-md group-hover:border-amber-500/30"}`}
+                    className={`absolute bottom-0 left-0 h-[94%] border border-amber-800/40 text-stone-100 p-5 flex flex-col justify-between shadow-2xl transition-all duration-500 ease-out rounded-l-md
+                      ${isFolderOpen ? "w-[22%] rounded-r-none" : "w-full rounded-r-md group-hover:border-amber-500/30"}
+                      bg-stone-900 
+                      ${isFolderOpen ? "" : "bg-gradient-to-r from-black/95 from-20% via-black/50 via-60% to-transparent to-90% bg-blend-overlay"}`}
+                    style={{ 
+                      backgroundImage: `url('${project.coverImage}')`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }}
                   >
-                    
-                    {/* 👇 COINCIDED ADDITION: TOP-RIGHT LINK BUTTON MOVED INTO MAIN FLOW */}
                     {!isFolderOpen && (
                       <a 
                         href={project.link}
@@ -304,7 +306,8 @@ export default function Home() {
                     )}
 
                     <div>
-                      <span className={`font-serif tracking-wide block transition-all duration-300 ${isFolderOpen ? "text-xs font-bold text-amber-400 tracking-normal" : "text-xl font-bold text-stone-100"}`}>
+                      <span className={`font-serif tracking-wide block transition-all duration-300 
+                        ${isFolderOpen ? "text-xs font-bold text-amber-400 tracking-normal" : "text-xl font-bold text-stone-100"}`}>
                         {project.name}
                       </span>
                       
@@ -328,33 +331,137 @@ export default function Home() {
               );
             })}
           </div>
-
         </div>
       </section>
 
-      {/* Placeholder sections for the remaining navbar targets */}
+      {/* 6. CERTIFICATES PAGE */}
       <section id="certificates-section" className="relative min-h-screen w-full bg-stone-950 border-t border-stone-900 p-12 md:p-24 z-30">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-serif text-stone-100 uppercase">Certifications & Achievements</h2>
+    
+          <div className="flex items-center space-x-4 mb-16">
+            <span className="text-amber-500 font-mono text-xs tracking-widest">[ VALIDATED_CREDENTIALS ]</span>
+            <h2 className="text-3xl font-serif text-stone-100 uppercase tracking-wide">Certifications & Achievements</h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "CCIS INNOVISION",
+                image: "/Photos/Certificates/CCISInnovision.jpg"
+              },
+              {
+                name: "Github Workshop",
+                image: "/Photos/Certificates/GithubWorkshop.png"
+              },
+              {
+                name: "Introduction to User Design Experience",
+                image: "/Photos/Certificates/GeorgiaInstitute.jpg"
+              },
+              {
+                name: "Input and Interaction",
+                image: "/Photos/Certificates/UCSanDiego.jpg"
+              },
+              {
+                name: "Ethics, Culture, and Global Perspectives",
+                image: "/Photos/Certificates/Illinois.jpg"
+              },
+            ].map((cert, idx) => (
+              <CertificateCard 
+                key={idx} 
+                name={cert.name} 
+                image={cert.image} 
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="Awards-section" className="relative min-h-screen w-full bg-stone-900 border-t border-stone-800 p-12 md:p-24 z-30">
+      {/* 7. AWARDS SECTION */}
+      <section id="awards-section" className="relative min-h-screen w-full bg-stone-900 border-t border-stone-800 p-12 md:p-24 z-30">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-serif text-stone-100 uppercase">Accomplishments & Awards</h2>
+    
+        {/* Section Header */}
+          <div className="flex items-center space-x-4 mb-16">
+            <span className="text-amber-500 font-mono text-xs tracking-widest">[ MERIT_LOG_02 ]</span>
+            <h2 className="text-3xl font-serif text-stone-100 uppercase tracking-wide">Accomplishments & Awards</h2>
+          </div>
+
+        {/* Vertical Stack Layout Grid */}
+        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+          {[
+            {
+              name: "Best Embedded System Design",
+              image: "/Photos/Ren-Energy.jpg", 
+              reflection: "Upon receiving this award, I've come ot realize there are many aspects I need to improve on, especially in IoT integration and research. Receiving this award is not only a pat on the back but a motivation to work even harder on future projects."
+            },
+            // To add more achievements, simply duplicate this object block right here!
+          ].map((award, idx) => (
+          <AwardCard 
+            key={idx}
+            name={award.name}
+            image={award.image}
+            reflection={award.reflection}
+            />
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Placeholder sections for the remaining navbar targets */}
-      <section id="Education-section" className="relative min-h-screen w-full bg-stone-950 border-t border-stone-900 p-12 md:p-24 z-30">
+      {/* 8. EDUCATION SECTION */}
+      {/* FIXED: Formatted ID target to lowercase to match navbar state */}
+      <section id="education-section" className="relative min-h-screen w-full bg-stone-950 border-t border-stone-900 p-12 md:p-24 z-30">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-serif text-stone-100 uppercase">Skills & Education</h2>
         </div>
       </section>
 
-      {/* Decorative Bottom Corner Watermark */}
-      <footer className="fixed bottom-4 left-6 z-50 text-[10px] font-mono text-stone-600 tracking-widest pointer-events-none">
-        SYSTEM CONFIGURATION // SECURE_HUB_v1.0
+      {/* 9. SECURE SYSTEM FOOTER */}
+      <footer className="relative w-full bg-stone-950 border-t border-stone-900 px-6 md:px-16 py-12 z-30 font-mono text-xs select-none">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          
+          {/* Left Block: Identity & Status Indicator */}
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <div className="flex items-center space-x-2 text-stone-500 tracking-widest">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>SYSTEM ONLINE // PORTFOLIO</span>
+            </div>
+            <p className="text-stone-600 text-[10px] tracking-wide text-center md:text-left">
+              &copy; {new Date().getFullYear()} Jesse Ulbenario. All rights secured.
+            </p>
+          </div>
+
+          {/* Center/Right Block: Social Vectors & Terminal Navigation Links */}
+          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-stone-400">
+            <a 
+              href="mailto:jesse.ulbenario@example.com" // 👈 Swap with your actual email!
+              className="hover:text-amber-500 transition-colors duration-200 flex items-center space-x-1"
+            >
+              <span>[ EMAIL ]</span>
+            </a>
+            
+            <a 
+              href="https://github.com/JesseUlbenario" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-amber-500 transition-colors duration-200"
+            >
+              <span>[ GITHUB ]</span>
+            </a>
+
+            <a 
+              href="https://linkedin.com/in/jesse-ulbenario" // 👈 Swap with your real link!
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-amber-500 transition-colors duration-200"
+            >
+              <span>[ LINKEDIN ]</span>
+            </a>
+          </div>
+
+        </div>
       </footer>
 
     </main>

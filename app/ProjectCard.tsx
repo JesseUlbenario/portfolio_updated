@@ -9,7 +9,7 @@ export default function ProjectCard() {
   const project = {
     name: "Project Name",
     link: "https://your-landing-page.com",
-    // 👇 Tip: Add the image path directly to your data structure later!
+    // Tip: Add the image path directly to your data structure later!
     coverImage: "/Photos/GradPhoto.png", 
     description: "Project Description goes here. Describe your design architectures or code specs.",
     tags: ["NEXT.JS", "TAILWIND CSS", "API_FETCH"]
