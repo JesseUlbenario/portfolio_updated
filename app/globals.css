@@ -30,3 +30,26 @@ body {
     box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.15); /* Soft amber glow */
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling for a high-end minimalist interface */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 4px; /* Makes the horizontal line sleek and thin */
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(12, 10, 9, 0.4); /* Dark translucent background track */
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(146, 64, 14, 0.6); /* Soft warm amber handle */
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 6, 0.8); /* Brighter highlight on hover */
+}
