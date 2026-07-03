@@ -5,11 +5,20 @@ import React, { useState } from "react";
 export default function ProjectCard() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Mock data for testing inside this standalone card component
+  const project = {
+    name: "Project Name",
+    link: "https://your-landing-page.com",
+    // 👇 Tip: Add the image path directly to your data structure later!
+    coverImage: "/Photos/GradPhoto.png", 
+    description: "Project Description goes here. Describe your design architectures or code specs.",
+    tags: ["NEXT.JS", "TAILWIND CSS", "API_FETCH"]
+  };
+
   return (
     <div className="flex items-center justify-center p-8 bg-stone-100 min-h-[500px]">
       
       {/* CARD CONTAINER BUTTON */}
-      {/* The master wrapper handles the relative positioning and transitions its width */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`relative h-96 flex text-left transition-all duration-500 ease-out select-none focus:outline-none group
@@ -17,23 +26,21 @@ export default function ProjectCard() {
       >
         
         {/* 1. THE DARK BACKGROUND FOLDER PANEL */}
-        {/* This mimics your dark brown backing structure. It expands outwards when open. */}
         <div
           className={`absolute bottom-0 right-0 h-[94%] bg-[#2b1a04] rounded-r-md p-6 pt-8 flex flex-col justify-between transition-all duration-500 ease-out border border-amber-900/20 shadow-xl
             ${isOpen ? "w-[83%] opacity-100 translate-x-0" : "w-[90%] opacity-80 translate-x-2"}`}
         >
-          {/* INNER EXPANDED CONTENT (Only fully visible when open) */}
+          {/* INNER EXPANDED CONTENT */}
           <div
             className={`transition-all duration-300 delay-150 flex flex-col h-full justify-between
               ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
           >
-            {/* Header Text Group */}
             <div>
               <h3 className="text-xl font-bold text-stone-100 font-serif tracking-wide">
-                Project Name
+                {project.name}
               </h3>
               <p className="text-xs text-stone-400 mt-1 font-sans">
-                Project Description goes here. Describe your design architectures or code specs.
+                {project.description}
               </p>
             </div>
 
@@ -53,27 +60,46 @@ export default function ProjectCard() {
           </div>
         </div>
 
-        {/* 2. THE LIGHTER FRONT COVER TABS */}
-        {/* This represents your main light brown card component block holding the title */}
+        {/* 2. OVERLYING FRONT TAB COVER */}
         <div
-          className={`absolute bottom-0 left-0 h-[94%] bg-[#6e4208] border border-amber-700/30 text-stone-100 p-4 flex flex-col justify-end shadow-2xl transition-all duration-500 ease-out rounded-l-md
-            ${isOpen ? "w-[22%] rounded-r-none" : "w-[90%] rounded-r-md group-hover:-translate-x-1"}`}
+          className={`absolute bottom-0 left-0 h-[94%] border border-amber-800/40 text-stone-100 p-5 flex flex-col justify-between shadow-2xl transition-all duration-500 ease-out rounded-l-md
+          ${isFolderOpen ? "w-[22%] rounded-r-none" : "w-full rounded-r-md group-hover:border-amber-500/30"}
+          bg-cover bg-center bg-no-repeat bg-stone-900 bg-gradient-to-t from-black/90 via-black/40 to-black/20 bg-blend-overlay`}
+          style={{ backgroundImage: `url('${project.coverImage}')` }} // 👈 DRAWS FROM DATA ARRAY ABOVE
         >
-          {/* Cover Label (Rotates or rearranges text dynamically based on state) */}
-          <div className="w-full">
-            <span
-              className={`font-serif tracking-wide block transition-all duration-300
-                ${isOpen ? "text-xs font-bold text-amber-400/80 truncate" : "text-lg font-bold"}`}
+          
+          {/* FIXED: Uses 'isOpen' instead of 'isFolderOpen' */}
+          {!isOpen && (
+            <a 
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()} 
+              className="absolute top-4 right-4 z-30 text-[9px] font-mono text-amber-500/70 hover:text-amber-400 bg-black/60 hover:bg-black/80 border border-amber-900/40 p-1 px-2 rounded flex items-center space-x-1 transition-all duration-200 pointer-events-auto"
             >
-              Project Name
+              <span>LIVE SITE</span>
+              <span>↗</span>
+            </a>
+          )}
+
+          <div>
+            <span className={`font-serif tracking-wide block transition-all duration-300 ${isOpen ? "text-xs font-bold text-amber-400 tracking-normal" : "text-xl font-bold text-stone-100"}`}>
+              {project.name}
             </span>
             
-            {/* Tiny interactive action signal visible when closed */}
             {!isOpen && (
-              <span className="text-[9px] font-mono text-amber-500/60 block mt-1 animate-pulse">
-                CLICK TO OPEN // ↗
-              </span>
+              <p className="text-xs text-amber-100/80 mt-1 font-sans max-w-md line-clamp-1 group-hover:text-stone-200 transition-colors">
+                {project.description}
+              </p>
             )}
+          </div>
+
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {project.tags.map((tag, i) => (
+              <span key={i} className="text-[9px] font-mono bg-black/60 text-amber-500/90 px-1.5 py-0.5 rounded border border-amber-900/30">
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
 

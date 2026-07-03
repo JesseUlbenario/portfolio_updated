@@ -98,7 +98,7 @@ export default function Home() {
           {/* Global Hub Action Counters (Top Right) */}
           <div className="flex items-center space-x-3 text-xs font-mono self-end md:self-auto">
             <a 
-              href="https://github.com" 
+              href="https://github.com/JesseUlbenario" 
               target="_blank" 
               rel="noopener noreferrer"
               className="group flex items-center space-x-2 bg-stone-900/70 backdrop-blur-md border border-stone-800 hover:border-amber-500/40 p-2 px-3 rounded transition-all duration-200 shadow-md"
@@ -187,7 +187,6 @@ export default function Home() {
       </div>
 
       {/* 5. NEW SCROLLABLE CONTENT AREA */}
-      {/* 5. NEW SCROLLABLE CONTENT AREA */}
       <section 
         id="projects-section" 
         className="relative min-h-screen w-full bg-stone-900 border-t border-stone-800 p-12 md:p-24 z-30"
@@ -204,18 +203,34 @@ export default function Home() {
           <div className="flex flex-col space-y-6 items-start">
             {[
               {
-                id: "space-library",
-                name: "Space Library",
-                description: "A dynamic, responsive planetary registry platform built to fetch and display real-time astronomical data sets from orbital telemetry clusters.",
-                tags: ["NEXT.JS", "TAILWIND CSS", "API_FETCH"],
-                placeholders: ["Telemetry View", "Star Map Engine", "Database Config"]
+                id: "solar-kapit-bahay",
+                name: "SolarKapitBahay",
+                link: "https://solarkapitbahay.vercel.app/",
+                coverImage: "/Photos/Background/SolarPanel.jpg",
+                description: "A peer-to-peer energy sgaring platform for Philippine Barangay and Communities in Rural areas.",
+                tags: ["IoT INTEGRATION", "ENERGY SHARING", "GREEDY ALGORITHM ALLOCATION"],
+                placeholders: [
+                  "/Photos/SolarKapitBahay/LogIn.png",
+                  "/Photos/SolarKapitBahay/Dashboard.png",
+                  "/Photos/SolarKapitBahay/EnergyTransfer.png",
+                  "/Photos/SolarKapitBahay/Simulation.png",
+                  "/Photos/SolarKapitBahay/Households.png",
+                  "/Photos/SolarKapitBahay/Alerts.png",
+                  "/Photos/SolarKapitBahay/Settings.png"
+                ]
               },
               {
-                id: "algo-visualizer",
-                name: "Algorithm Visualizer",
-                description: "Interactive logic mapping layout engineered to trace computational execution streams sequentially for greedy and divide-and-conquer logic arrays.",
-                tags: ["REACT", "FRAMER MOTION", "MATPLOTLIB"],
-                placeholders: ["Execution Matrix", "State Plotter", "Logic Step Tracer"]
+                id: "space-library",
+                name: "Space Library",
+                link: "https://thespacelibrary.vercel.app/",
+                coverImage: "/Photos/Background/SpaceBackground.jpg",
+                description: "A dynamic, responsive planetary registry platform built to fetch and display real-time astronomical data sets from orbital telemetry clusters.",
+                tags: ["NEXT.JS", "TAILWIND CSS", "API_FETCH"],
+                placeholders: [
+                  "/Photos/SpaceLibrary/Stars.png", 
+                  "/Photos/SpaceLibrary/Galaxies.png", 
+                  "/Photos/SpaceLibrary/Planets.png"
+                ]
               }
             ].map((project) => {
               // Create an explicit check to see if THIS specific folder card is open
@@ -250,21 +265,21 @@ export default function Home() {
                       <div className="mt-2">
                         {/* Horizontal Scroll Wrapper */}
                         <div className="flex space-x-4 overflow-x-auto pb-3 pt-1 scrollbar-thin scrollbar-thumb-amber-800/60 scrollbar-track-stone-950/40">
-                          {project.placeholders.map((text, i) => (
+                          {project.placeholders.map((imagePath, i) => (
                           <div 
-                            key={i} 
-                            className="bg-[#edd6b1] h-28 w-44 shrink-0 rounded border border-amber-900/10 p-2 flex flex-col justify-between shadow-inner hover:scale-[1.02] transition-transform"
+                          key={i} 
+                          /* UPDATED SIZE CLASSES AND REMOVED THE OVERLAY MIX BLEND */
+                          className="h-44 w-64 shrink-0 rounded border border-amber-900/10 p-3 flex flex-col justify-between shadow-md hover:scale-[1.02] transition-transform bg-cover bg-center bg-no-repeat bg-stone-800"
+                          style={{ backgroundImage: `url('${imagePath}')` }}
                           >
-                          <span className="text-[9px] text-amber-950 font-mono font-bold">
-                            LOG_0{i+1} //
-                          </span>
-                          <span className="text-[10px] text-amber-900/80 font-mono leading-tight">
-                            {text}
+                          {/* Optional text labels styled with text-shadow for readability without an overlay */}
+                          <span className="text-xs text-stone-100 font-mono leading-tight drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+                            Screenshot {i+1}
                           </span>
                         </div>
-                        ))}
-                        </div>
+                      ))}
                       </div>
+                    </div>
                     </div>
                   </div>
 
@@ -273,6 +288,21 @@ export default function Home() {
                     className={`absolute bottom-0 left-0 h-[94%] bg-[#543206] border border-amber-800/40 text-stone-100 p-5 flex flex-col justify-between shadow-2xl transition-all duration-500 ease-out rounded-l-md
                       ${isFolderOpen ? "w-[22%] rounded-r-none" : "w-full rounded-r-md group-hover:border-amber-500/30"}`}
                   >
+                    
+                    {/* 👇 COINCIDED ADDITION: TOP-RIGHT LINK BUTTON MOVED INTO MAIN FLOW */}
+                    {!isFolderOpen && (
+                      <a 
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()} 
+                        className="absolute top-4 right-4 z-30 text-[9px] font-mono text-amber-500/70 hover:text-amber-400 bg-black/40 hover:bg-black/60 border border-amber-900/40 p-1 px-2 rounded flex items-center space-x-1 transition-all duration-200 pointer-events-auto"
+                      >
+                        <span>LIVE SITE</span>
+                        <span>↗</span>
+                      </a>
+                    )}
+
                     <div>
                       <span className={`font-serif tracking-wide block transition-all duration-300 ${isFolderOpen ? "text-xs font-bold text-amber-400 tracking-normal" : "text-xl font-bold text-stone-100"}`}>
                         {project.name}
