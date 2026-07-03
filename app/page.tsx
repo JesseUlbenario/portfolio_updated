@@ -409,10 +409,113 @@ export default function Home() {
       </section>
 
       {/* 8. EDUCATION SECTION */}
-      {/* FIXED: Formatted ID target to lowercase to match navbar state */}
-      <section id="education-section" className="relative min-h-screen w-full bg-stone-950 border-t border-stone-900 p-12 md:p-24 z-30">
+      <section id="education-section" className="relative min-h-screen w-full bg-stone-950 border-t border-stone-900 p-12 md:p-24 z-30 select-none">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-serif text-stone-100 uppercase">Skills & Education</h2>
+          
+          {/* Section Header */}
+          <div className="flex items-center space-x-4 mb-16">
+            <span className="text-amber-500 font-mono text-xs tracking-widest">[ ACADEMIC_CORE ]</span>
+            <h2 className="text-3xl font-serif text-stone-100 uppercase tracking-wide">Skills & Education</h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+            
+            {/* LEFT 2 COLUMNS: EDUCATION TIMELINE TIMELINE */}
+            <div className="lg:col-span-2 space-y-8">
+              <h3 className="text-xs font-mono text-amber-500/80 uppercase tracking-widest mb-6">// Academic Timeline</h3>
+              
+              <div className="relative border-l border-stone-800 ml-3 pl-6 space-y-10">
+                
+                {/* Education Node 1 */}
+                <div className="relative">
+                  {/* Timeline Node Dot Indicator */}
+                  <div className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-yellow-600 border-2 border-stone-950 shadow-[0_0_8px_rgba(217,119,6,0.5)]" />
+                  
+                  <span className="text-xs font-mono text-stone-500">2024 — PRESENT</span>
+                  <h3 className="text-xl font-serif text-stone-100 mt-1">College</h3>
+                  <h4 className="text-xl font-serif text-stone-100 mt-1">Bachelor of Science in Computer Science</h4>
+                  <p className="text-sm font-sans text-yellow-500/90 mt-0.5">Mapúa Malayan Colleges Mindanao</p>
+                </div>
+
+                <div className="relative">
+                  {/* Timeline Node Dot Indicator */}
+                  <div className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-amber-600 border-2 border-stone-950 shadow-[0_0_8px_rgba(217,119,6,0.5)]" />
+                  
+                  <span className="text-xs font-mono text-stone-500">2022 — 2024</span>
+                  <h3 className="text-xl font-serif text-stone-100 mt-1">Senior High School</h3>
+                  <p className="text-sm font-sans text-amber-500/90 mt-0.5">Mapúa Malayan Colleges Mindanao</p>
+                </div>
+
+                <div className="relative">
+                  {/* Timeline Node Dot Indicator */}
+                  <div className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-orange-600 border-2 border-stone-950 shadow-[0_0_8px_rgba(217,119,6,0.5)]" />
+                  
+                  <span className="text-xs font-mono text-stone-500">2018 — 2022</span>
+                  <h3 className="text-xl font-serif text-stone-100 mt-1">Junior High School</h3>
+                  <p className="text-sm font-sans text-orange-500/90 mt-0.5">Davao City Special National High School Bangkal</p>
+                </div>
+
+                <div className="relative">
+                  {/* Timeline Node Dot Indicator */}
+                  <div className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-red-600 border-2 border-stone-950 shadow-[0_0_8px_rgba(217,119,6,0.5)]" />
+                  
+                  <span className="text-xs font-mono text-stone-500">2012 — 2018</span>
+                  <h3 className="text-xl font-serif text-stone-100 mt-1">Elementary</h3>
+                  <p className="text-sm font-sans text-red-500/90 mt-0.5">St. Mary's Initial Learning Experience</p>
+                </div>
+
+                {/* You can add more nodes here if you want to include Senior High School, etc. */}
+                
+              </div>
+            </div>
+
+            {/* RIGHT 1 COLUMN: CORE SKILLS DIRECTORY */}
+            <div className="space-y-6">
+              <h3 className="text-xs font-mono text-amber-500/80 uppercase tracking-widest mb-6">// Technical Skills</h3>
+              
+              <div className="bg-stone-900/40 border border-stone-900 rounded-xl p-6 space-y-6 shadow-inner">
+                
+                {/* Skill Category 1 */}
+                <div>
+                  <span className="text-[10px] font-mono text-stone-500 block mb-2 uppercase tracking-wider">Languages</span>
+                  <div className="flex flex-wrap gap-2">
+                    {["Java", "JavaScript", "TypeScript", "8086 Assembly"].map((skill, idx) => (
+                      <span key={idx} className="text-xs font-mono bg-stone-900 border border-stone-800 text-stone-300 px-2.5 py-1 rounded hover:border-amber-500/30 transition-colors">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Skill Category 2 */}
+                <div>
+                  <span className="text-[10px] font-mono text-stone-500 block mb-2 uppercase tracking-wider">Frameworks & Web</span>
+                  <div className="flex flex-wrap gap-2">
+                    {["React", "Next.js", "Tailwind CSS", "Java Swing"].map((skill, idx) => (
+                      <span key={idx} className="text-xs font-mono bg-stone-900 border border-stone-800 text-stone-300 px-2.5 py-1 rounded hover:border-amber-500/30 transition-colors">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Skill Category 3 */}
+                <div>
+                  <span className="text-[10px] font-mono text-stone-500 block mb-2 uppercase tracking-wider">Concepts & Tools</span>
+                  <div className="flex flex-wrap gap-2">
+                    {["Algorithm Visualization", "UI/UX Design", "Git / GitHub", "IoT Integration"].map((skill, idx) => (
+                      <span key={idx} className="text-xs font-mono bg-stone-900 border border-stone-800 text-stone-300 px-2.5 py-1 rounded hover:border-amber-500/30 transition-colors">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </section>
 
@@ -437,7 +540,7 @@ export default function Home() {
           {/* Center/Right Block: Social Vectors & Terminal Navigation Links */}
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-stone-400">
             <a 
-              href="mailto:jesse.ulbenario@example.com" // 👈 Swap with your actual email!
+              href="ulbenariojessenicoleb@gmail.com" // 👈 Swap with your actual email!
               className="hover:text-amber-500 transition-colors duration-200 flex items-center space-x-1"
             >
               <span>[ EMAIL ]</span>
@@ -453,7 +556,7 @@ export default function Home() {
             </a>
 
             <a 
-              href="https://linkedin.com/in/jesse-ulbenario" // 👈 Swap with your real link!
+              href="www.linkedin.com/in/jesse-ulbenario-07875a293" // 👈 Swap with your real link!
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-amber-500 transition-colors duration-200"
