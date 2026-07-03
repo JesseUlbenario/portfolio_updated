@@ -9,6 +9,7 @@ import AwardCard from './AwardCard';
 export default function Home() {
   // 1. Keep track of which section is currently visible on screen
   const [activeSection, setActiveSection] = useState('#overview-section');
+  const isFolderOpen = activeSection.startsWith('#project-');
 
   useEffect(() => {
     // FIXED: Cleaned all section paths to strict matching lowercase IDs
