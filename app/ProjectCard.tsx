@@ -5,11 +5,9 @@ import React, { useState } from "react";
 export default function ProjectCard() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Mock data for testing inside this standalone card component
   const project = {
     name: "Project Name",
     link: "https://your-landing-page.com",
-    // Tip: Add the image path directly to your data structure later!
     coverImage: "/Photos/GradPhoto.png", 
     description: "Project Description goes here. Describe your design architectures or code specs.",
     tags: ["NEXT.JS", "TAILWIND CSS", "API_FETCH"]
@@ -60,7 +58,7 @@ export default function ProjectCard() {
           </div>
         </div>
 
-        {/* 2. OVERLYING FRONT TAB COVER */}
+        {/* 2. OVERLYING FRONT TAB COVER (FIXED: Re-added the wrapper element tag here) */}
         <div
           className={`absolute bottom-0 left-0 h-[94%] border border-amber-800/40 text-stone-100 p-5 flex flex-col justify-between shadow-2xl transition-all duration-500 ease-out rounded-l-md bg-stone-900 bg-cover bg-center bg-no-repeat bg-gradient-to-t from-black/90 via-black/40 to-black/20 bg-blend-overlay ${
             isOpen 
@@ -69,6 +67,14 @@ export default function ProjectCard() {
           }`}
           style={{ backgroundImage: `url('${project.coverImage}')` }}
         >
+          
+          {!isOpen && (
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
+              <span className="bg-stone-950/80 backdrop-blur-sm border border-amber-500/30 text-amber-500 font-mono text-[10px] tracking-widest px-3 py-1.5 rounded uppercase shadow-lg shadow-black/50">
+                [ Click for Details ]
+              </span>
+            </div>
+          )}
           
           {!isOpen && (
             <a 

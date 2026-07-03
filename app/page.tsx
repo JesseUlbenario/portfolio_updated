@@ -293,6 +293,15 @@ export default function Home() {
                       backgroundRepeat: 'no-repeat'
                     }}
                   >
+
+                    {!isFolderOpen && (
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
+                        <span className="bg-stone-950/80 backdrop-blur-sm border border-amber-500/15 text-amber-500/70 font-mono text-[10px] tracking-widest px-3 py-1.5 rounded uppercase shadow-lg shadow-black/50">
+                          [ Click for Details ]
+                        </span>
+                      </div>
+                    )}
+
                     {!isFolderOpen && (
                       <a 
                         href={project.link}
@@ -393,7 +402,7 @@ export default function Home() {
             {
               name: "Best Embedded System Design",
               image: "/Photos/Ren-Energy.jpg", 
-              reflection: "Upon receiving this award, I've come ot realize there are many aspects I need to improve on, especially in IoT integration and research. Receiving this award is not only a pat on the back but a motivation to work even harder on future projects."
+              reflection: "Upon receiving this award, I've come to realize there are many aspects I need to improve on, especially in IoT integration and research. Receiving this award is not only a pat on the back but a motivation to work even harder on future projects."
             },
             // To add more achievements, simply duplicate this object block right here!
           ].map((award, idx) => (
