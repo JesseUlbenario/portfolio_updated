@@ -62,13 +62,14 @@ export default function ProjectCard() {
 
         {/* 2. OVERLYING FRONT TAB COVER */}
         <div
-          className={`absolute bottom-0 left-0 h-[94%] border border-amber-800/40 text-stone-100 p-5 flex flex-col justify-between shadow-2xl transition-all duration-500 ease-out rounded-l-md
-          ${isFolderOpen ? "w-[22%] rounded-r-none" : "w-full rounded-r-md group-hover:border-amber-500/30"}
-          bg-cover bg-center bg-no-repeat bg-stone-900 bg-gradient-to-t from-black/90 via-black/40 to-black/20 bg-blend-overlay`}
-          style={{ backgroundImage: `url('${project.coverImage}')` }} // 👈 DRAWS FROM DATA ARRAY ABOVE
+          className={`absolute bottom-0 left-0 h-[94%] border border-amber-800/40 text-stone-100 p-5 flex flex-col justify-between shadow-2xl transition-all duration-500 ease-out rounded-l-md bg-stone-900 bg-cover bg-center bg-no-repeat bg-gradient-to-t from-black/90 via-black/40 to-black/20 bg-blend-overlay ${
+            isOpen 
+              ? "w-[22%] rounded-r-none" 
+              : "w-full rounded-r-md group-hover:border-amber-500/30"
+          }`}
+          style={{ backgroundImage: `url('${project.coverImage}')` }}
         >
           
-          {/* FIXED: Uses 'isOpen' instead of 'isFolderOpen' */}
           {!isOpen && (
             <a 
               href={project.link}
